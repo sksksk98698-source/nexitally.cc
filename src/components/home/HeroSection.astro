@@ -1,7 +1,6 @@
 ---
 import Button from "@/components/ui/Button.astro";
 import Badge from "@/components/ui/Badge.astro";
-import AnimatedText from "@/components/ui/AnimatedText.astro";
 import BrowserFrame from "@/components/ui/BrowserFrame.astro";
 import { siteConfig } from "@/config/site";
 import { ArrowRight, ChartColumn, Shield, Zap, Sparkles } from "@lucide/astro";
@@ -42,14 +41,9 @@ const barCycles = JSON.stringify([
       </div>
 
       <!-- Title -->
-      <h1 class="mb-4">
-        <AnimatedText
-          content="Nexitally 品牌官方落地页 全球 IEPL 企业级内网专线"
-          delay={0.1}
-          duration={0.5}
-          stagger={0.06}
-          class="text-3xl text-pri leading-tight sm:text-4xl lg:text-5xl font-brand font-bold tracking-tight"
-        />
+      <h1 class="mb-4 text-3xl sm:text-4xl lg:text-5xl font-brand font-bold tracking-tight text-neutral-900 dark:text-white leading-tight">
+        Nexitally 品牌官方官网<br />
+        <span class="text-primary dark:text-primary-light">企业级全内网 IEPL / IPLC 专线</span>
       </h1>
 
       <!-- Subtitle -->
