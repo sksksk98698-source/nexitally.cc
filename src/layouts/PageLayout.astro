@@ -1,15 +1,29 @@
 ---
-import Layout from  "@/layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
+
 interface Props {
-	title?: string | undefined;
-	keywords?: string | undefined;
-	description?: string | undefined;
+  title?: string | undefined;
+  keywords?: string | undefined;
+  description?: string | undefined;
+  robots?: string | undefined;
+  noindex?: boolean | undefined;
+  canonical?: string | false | undefined;
+  faqSchema?: Array<{ question: string; answer: string }> | undefined;
 }
-const { title, description,keywords} = Astro.props;
+
+const { title, description, keywords, robots, noindex, canonical, faqSchema } = Astro.props;
 ---
 
-<Layout title={title} description={description} keywords={keywords}>
+<Layout
+  title={title}
+  description={description}
+  keywords={keywords}
+  robots={robots}
+  noindex={noindex}
+  canonical={canonical}
+  faqSchema={faqSchema}
+>
   <main class="post-wrapper">
-      <slot />
+    <slot />
   </main>
 </Layout>

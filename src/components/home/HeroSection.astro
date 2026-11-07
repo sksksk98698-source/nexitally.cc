@@ -4,28 +4,28 @@ import Badge from "@/components/ui/Badge.astro";
 import AnimatedText from "@/components/ui/AnimatedText.astro";
 import BrowserFrame from "@/components/ui/BrowserFrame.astro";
 import { siteConfig } from "@/config/site";
-import { ArrowRight, ChartColumn } from "@lucide/astro";
+import { ArrowRight, ChartColumn, Shield, Zap, Sparkles } from "@lucide/astro";
 
 const stats = [
-  { label: "Active users", value: "12,438", delta: "+24.5%", cycle: ["12,438", "12,441", "12,447", "12,453"] },
-  { label: "Sessions",     value: "8,291",  delta: "+12.1%", cycle: ["8,291", "8,296", "8,302", "8,309"] },
-  { label: "Revenue",      value: "$24.5k", delta: "+18.2%", cycle: ["$24.5k", "$24.6k", "$24.7k", "$24.8k"] },
-  { label: "Conversion",   value: "4.8%",   delta: "+0.6%",  cycle: ["4.8%", "4.9%", "5.0%", "4.9%"] },
+  { label: "香港 IPLC 专线", value: "18 ms", delta: "99.9% 稳定", cycle: ["18 ms", "17 ms", "18 ms", "19 ms"] },
+  { label: "日本 IEPL 专线", value: "32 ms", delta: "零晚高峰拥堵", cycle: ["32 ms", "31 ms", "32 ms", "33 ms"] },
+  { label: "单节点带宽",    value: "2.5 Gbps", delta: "4K 极速秒开", cycle: ["2.5 Gbps", "2.4 Gbps", "2.5 Gbps", "2.6 Gbps"] },
+  { label: "AI与流媒体解锁", value: "100%", delta: "多地原生住宅", cycle: ["100%", "99.9%", "100%", "100%"] },
 ];
 
-const bars = [32, 48, 40, 64, 56, 80, 72];
+const bars = [85, 92, 88, 95, 94, 98, 96];
 const barCycles = JSON.stringify([
-  [32, 48, 40, 64, 56, 80, 72],
-  [38, 42, 50, 58, 64, 72, 86],
-  [28, 54, 44, 68, 50, 76, 80],
-  [42, 46, 38, 60, 62, 84, 70],
+  [85, 92, 88, 95, 94, 98, 96],
+  [88, 90, 92, 94, 96, 95, 98],
+  [84, 91, 89, 93, 95, 97, 96],
+  [86, 93, 90, 96, 95, 99, 97],
 ]);
 ---
 
 <div class="relative site-container z-20 w-full mx-auto mt-16 px-4 md:mt-18 lg:mt-32 xl:px-0">
   <div class="relative w-full px-4 flex flex-col items-center justify-between md:flex-row mb-16">
     <!-- Left: Text -->
-    <div class="relative w-full md:max-w-[520px] md:w-1/2 text-center sm:text-left sm:-mt-8">
+    <div class="relative w-full md:max-w-[560px] md:w-1/2 text-center sm:text-left sm:-mt-8">
       <!-- Badges -->
       <div
         class="flex flex-wrap gap-2 justify-center sm:justify-start mb-6"
@@ -34,30 +34,42 @@ const barCycles = JSON.stringify([
         data-aos-duration="500"
         data-aos-once="true"
       >
-        <Badge variant="primary">Open-source</Badge>
-        <Badge variant="accent">Astro + Tailwind</Badge>
+        <Badge variant="primary">始于 2020 稳定运营</Badge>
+        <Badge variant="accent">全 IEPL / IPLC 专线</Badge>
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border border-dashed border-primary/30 text-primary">
+          VLESS 极速协议
+        </span>
       </div>
 
       <!-- Title -->
       <h1 class="mb-4">
         <AnimatedText
-          content="Ship your SaaS site in days, not weeks"
+          content="Nexitally 品牌官方落地页 全球 IEPL 企业级内网专线"
           delay={0.1}
           duration={0.5}
-          stagger={0.08}
-          class="text-4xl text-pri leading-tight md:text-4xl lg:text-6xl font-brand"
+          stagger={0.06}
+          class="text-3xl text-pri leading-tight sm:text-4xl lg:text-5xl font-brand font-bold tracking-tight"
         />
       </h1>
 
       <!-- Subtitle -->
       <div class="mb-6">
-        <AnimatedText
-          content="A design-led, open-source SaaS template with 15+ modular sections, built-in dark mode, and Lighthouse 95+ out of the box. Astro + Tailwind by default."
-          delay={0.3}
-          duration={0.5}
-          stagger={0.015}
-          class="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed"
-        />
+        <p class="text-base text-neutral-600 dark:text-neutral-300 leading-relaxed font-normal">
+          专注于<strong>高要求跨境电商出海、TikTok 直播推流、ChatGPT / Claude AI 生产力与全球 4K 超高清流媒体</strong>。全节点标配 ×1.0 真实倍率，单节点最高 2.5Gbps 带宽，不限设备数量，晚高峰稳定不卡顿。
+        </p>
+      </div>
+
+      <!-- Feature Tags -->
+      <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs text-neutral-500 dark:text-neutral-400 mb-8 justify-center sm:justify-start">
+        <span class="flex items-center gap-1">
+          <Zap class="w-3.5 h-3.5 text-primary" /> 自研客户端一键即连
+        </span>
+        <span class="flex items-center gap-1">
+          <Shield class="w-3.5 h-3.5 text-emerald-500" /> Clash / 小火箭多端订阅
+        </span>
+        <span class="flex items-center gap-1">
+          <Sparkles class="w-3.5 h-3.5 text-amber-500" /> 年付折算仅约 8.25元/月
+        </span>
       </div>
 
       <!-- Buttons -->
@@ -68,12 +80,11 @@ const barCycles = JSON.stringify([
         data-aos-duration="500"
         data-aos-once="true"
       >
-        <Button url={siteConfig.social.github} type="fill" target="_blank">
-
-         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-gfykqide="true" class="lucide lucide-github"> <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path>  </svg>  View on GitHub
+        <Button url={siteConfig.registerUrl} target="_blank" type="fill" className="text-base px-6 py-3">
+          立即开通 / 注册 <ArrowRight size={16} />
         </Button>
-        <Button url={siteConfig.social.github} target="_blank">
-            Twitter <ArrowRight size={16} />
+        <Button url="#pricing" className="text-base px-6 py-3">
+          查看套餐方案
         </Button>
       </div>
     </div>
@@ -86,18 +97,18 @@ const barCycles = JSON.stringify([
       data-aos-duration="800"
       data-aos-once="true"
     >
-      <BrowserFrame url="ricoui.com" className="w-full">
-        <div class="p-5 md:p-6 h-[300px] md:h-[350px] flex flex-col gap-4">
+      <BrowserFrame url="nexitally.cc" className="w-full">
+        <div class="p-5 md:p-6 h-[320px] md:h-[360px] flex flex-col gap-4">
           <!-- Mock toolbar -->
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
               <span class="hero-live-dot relative w-2 h-2 rounded-full bg-emerald-500"></span>
-              <span class="text-xs font-semibold text-neutral-700 dark:text-neutral-200">Dashboard</span>
+              <span class="text-xs font-semibold text-neutral-700 dark:text-neutral-200">Nexitally Node Monitor (Live)</span>
             </div>
             <div class="flex items-center gap-1.5">
-              <div class="w-6 h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-700"></div>
-              <div class="w-6 h-1.5 rounded-full bg-neutral-200 dark:bg-neutral-700"></div>
-              <div class="hero-toolbar-progress w-6 h-1.5 rounded-full bg-primary/50"></div>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono">
+                IEPL Connected
+              </span>
             </div>
           </div>
 
@@ -105,10 +116,10 @@ const barCycles = JSON.stringify([
           <div class="grid grid-cols-2 gap-3 flex-1">
             {stats.map((stat, i) => (
               <div class="rounded-lg border border-primary/10 dark:border-neutral-700 bg-bg-primary/40 dark:bg-neutral-800/40 p-3 flex flex-col justify-between">
-                <span class="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{stat.label}</span>
-                <div class="flex items-end justify-between">
+                <span class="text-[10px] font-medium text-neutral-500 dark:text-neutral-400">{stat.label}</span>
+                <div class="flex items-end justify-between mt-1">
                   <span
-                    class="hero-stat-value text-lg md:text-xl font-brand text-neutral-800 dark:text-neutral-100 leading-none"
+                    class="hero-stat-value text-base md:text-lg font-brand text-neutral-800 dark:text-neutral-100 font-bold leading-none"
                     data-cycle={stat.cycle.join("|")}
                     style={`animation-delay: ${i * 400}ms;`}
                   >{stat.value}</span>
@@ -126,9 +137,9 @@ const barCycles = JSON.stringify([
             <div class="flex items-center justify-between mb-2">
               <div class="flex items-center gap-1.5">
                 <ChartColumn class="w-3 h-3 text-primary" />
-                <span class="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">Weekly</span>
+                <span class="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">专线晚高峰吞吐率 (99.9% SLA)</span>
               </div>
-              <span class="text-[10px] text-neutral-400">7d</span>
+              <span class="text-[10px] text-emerald-500 font-mono">0.00% Packet Loss</span>
             </div>
             <div
               class="flex items-end gap-1.5 h-10 hero-bars"
@@ -138,7 +149,7 @@ const barCycles = JSON.stringify([
                 <div
                   class:list={[
                     "hero-bar flex-1 rounded-sm origin-bottom",
-                    i === bars.length - 1 ? "bg-primary hero-bar-active" : "bg-primary/25 dark:bg-primary/35",
+                    i === bars.length - 1 ? "bg-primary hero-bar-active" : "bg-primary/35 dark:bg-primary/45",
                   ]}
                   style={`--bar-h: ${h}%; height: ${h}%; animation-delay: ${i * 90}ms;`}
                 ></div>
@@ -164,113 +175,57 @@ const barCycles = JSON.stringify([
   }
   @keyframes hero-live-ping {
     0%   { transform: scale(1);   opacity: 0.7; }
-    80%, 100% { transform: scale(3); opacity: 0; }
+    80%, 100% { transform: scale(2.8); opacity: 0; }
   }
 
-  /* ─── Toolbar third progress pill — subtle width loop ───────── */
+  /* ─── Toolbar progress micro-bar ──────────────────── */
   .hero-toolbar-progress {
-    animation: hero-progress-cycle 3.4s ease-in-out infinite;
-    transform-origin: left center;
+    animation: hero-progress 3.6s ease-in-out infinite alternate;
   }
-  @keyframes hero-progress-cycle {
-    0%, 100% { opacity: 0.5; transform: scaleX(0.85); }
-    50%      { opacity: 1;   transform: scaleX(1);    }
+  @keyframes hero-progress {
+    0%   { width: 1.5rem; opacity: 0.5; }
+    50%  { width: 3.25rem; opacity: 0.85; }
+    100% { width: 2rem; opacity: 0.6; }
   }
 
-  /* ─── Stat values — fade-flash on cycle update ──── */
+  /* ─── Stat numbers — subtle breath on cycle ────────── */
   .hero-stat-value {
-    transition: opacity 200ms ease, transform 200ms ease;
     display: inline-block;
+    transition: transform 0.25s ease, opacity 0.25s ease;
   }
-  .hero-stat-value.is-flashing {
-    opacity: 0.35;
-    transform: translateY(2px);
+  .hero-stat-value.is-cycling {
+    transform: translateY(-2px);
+    opacity: 0.65;
   }
 
-  /* ─── Stat delta — staggered breathing glow ──────── */
+  /* ─── Stat deltas — pulse opacity ──────────────────── */
   .hero-delta {
-    animation: hero-delta-pulse 2.4s ease-in-out infinite;
+    animation: hero-delta-pulse 3s ease-in-out infinite;
   }
   @keyframes hero-delta-pulse {
-    0%, 100% { opacity: 1;   filter: drop-shadow(0 0 0 transparent); }
-    50%      { opacity: 0.65; filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.5)); }
+    0%, 100% { opacity: 0.8; }
+    50%      { opacity: 1; transform: scale(1.04); }
   }
 
-  /* ─── Bar chart — staggered rise on first paint + smooth height transitions ── */
+  /* ─── Mini chart bars — idle breath wave ───────────── */
   .hero-bar {
-    animation: hero-bar-rise 700ms cubic-bezier(0.4, 0, 0.2, 1) backwards;
-    transition: height 900ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  @keyframes hero-bar-rise {
-    from { height: 0 !important; opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  /* ─── Highest bar — gentle vertical pulse loop ───── */
   .hero-bar-active {
-    animation:
-      hero-bar-rise 700ms cubic-bezier(0.4, 0, 0.2, 1) backwards,
-      hero-bar-glow 2.6s ease-in-out 1.2s infinite;
+    box-shadow: 0 0 10px rgba(45, 109, 195, 0.45);
+    animation: hero-bar-glow 2.4s ease-in-out infinite alternate;
   }
   @keyframes hero-bar-glow {
-    0%, 100% { transform: scaleY(1);    filter: brightness(1); }
-    50%      { transform: scaleY(0.93); filter: brightness(1.15); }
+    0%   { opacity: 0.85; box-shadow: 0 0 6px rgba(45, 109, 195, 0.3); }
+    100% { opacity: 1;    box-shadow: 0 0 14px rgba(45, 109, 195, 0.6); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-live-dot::before,
     .hero-toolbar-progress,
     .hero-delta,
-    .hero-bar,
-    .hero-bar-active,
-    .hero-stat-value {
+    .hero-bar-active {
       animation: none !important;
-      transition: none !important;
     }
   }
 </style>
-
-<script>
-  // Cycle stat values on a stagger (live-data feel)
-  document.querySelectorAll<HTMLElement>('.hero-stat-value').forEach((el, i) => {
-    const cycleAttr = el.dataset.cycle;
-    if (!cycleAttr) return;
-    const values = cycleAttr.split('|');
-    if (values.length < 2) return;
-    let idx = 0;
-    setInterval(() => {
-      idx = (idx + 1) % values.length;
-      el.classList.add('is-flashing');
-      window.setTimeout(() => {
-        el.textContent = values[idx];
-        el.classList.remove('is-flashing');
-      }, 200);
-    }, 3200 + i * 700);
-  });
-
-  // Rotate bar-chart heights through predefined sets
-  const heroBarsHost = document.querySelector<HTMLElement>('.hero-bars');
-  const heroBars = document.querySelectorAll<HTMLElement>('.hero-bar');
-  if (heroBarsHost && heroBars.length > 0) {
-    try {
-      const cycles = JSON.parse(heroBarsHost.dataset.barCycles || '[]') as number[][];
-      if (cycles.length > 1) {
-        let cycleIdx = 0;
-        // Let the entry rise animation finish first (~1.3s)
-        window.setTimeout(() => {
-          window.setInterval(() => {
-            cycleIdx = (cycleIdx + 1) % cycles.length;
-            const next = cycles[cycleIdx];
-            heroBars.forEach((b, i) => {
-              if (typeof next[i] === 'number') {
-                b.style.height = `${next[i]}%`;
-              }
-            });
-          }, 2400);
-        }, 1500);
-      }
-    } catch {
-      /* swallow JSON parse errors silently */
-    }
-  }
-</script>

@@ -7,29 +7,29 @@ const currentYear = new Date().getFullYear();
 
 const footerLinks = {
   product: [
-    { name: "Features", url: "/features" },
-    { name: "Pricing", url: "/pricing" },
-    { name: "Changelog", url: "/changelog" },
-    { name: "Sign in", url: "/sign-in" },
-    { name: "Sign up", url: "/sign-up" },
+    { name: "套餐方案", url: "/pricing" },
+    { name: "专线优势", url: "/features" },
+    { name: "使用流程", url: "/#steps" },
+    { name: "官方注册", url: "/sign-up" },
+    { name: "节点动态", url: "/changelog" },
   ],
   resources: [
-    { name: "Blog", url: "/blog" },
-    { name: "Elements", url: "/elements" },
-    { name: "404", url: "/404" },
-    { name: "Docs", url: siteConfig.social.github + "#readme" },
-    { name: "GitHub", url: siteConfig.social.github },
+    { name: "配置教程", url: "/blog" },
+    { name: "Clash/小火箭指南", url: "/blog/nexitally-clash-shadowrocket-setup-guide" },
+    { name: "IEPL 专线解析", url: "/blog/iepl-iplc-vless-acceleration-explained" },
+    { name: "常见答疑 (FAQ)", url: "/#faq" },
+    { name: "4K与直播手册", url: "/blog/global-streaming-tiktok-live-low-latency-guide" },
   ],
   company: [
-    { name: "About", url: "/about" },
-    { name: "Contact", url: "/contact" },
+    { name: "关于品牌", url: "/about" },
+    { name: "联系支持", url: "/contact" },
+    { name: "控制台登录", url: "/sign-in" },
   ],
   legal: [
-    { name: "License (MIT)", url: siteConfig.social.github + "/blob/main/LICENSE" },
+    { name: "服务条款", url: "/about" },
+    { name: "隐私政策", url: "/about" },
   ],
 };
-
-const templateVersion = "v1.0.0";
 ---
 
 <section class="text-gray-700 border-t mt-20 md:mt-48 border-dashed border-primary/15 dark:border-primary-dark/15 border-[.75px]">
@@ -38,8 +38,8 @@ const templateVersion = "v1.0.0";
     <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-12">
       <div class="max-w-sm">
         <Logo />
-        <p class="mt-4 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-          A polished SaaS template built with Astro and Tailwind CSS. Open-source, fast, and ready for production.
+        <p class="mt-4 text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
+          Nexitally（奶昔）始于 2020 年稳定运营。专注提供全球 IEPL / IPLC 企业级内网专线与 VLESS 协议，全节点 ×1.0 真实倍率，服务于高标准跨境出海、跨国办公、AI 工具与 4K 流媒体。
         </p>
       </div>
 
@@ -47,11 +47,11 @@ const templateVersion = "v1.0.0";
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12">
         <!-- Product -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">Product</h4>
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">专线产品</h4>
           <ul class="space-y-3">
             {footerLinks.product.map((link) => (
               <li>
-                <a href={link.url} class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
+                <a href={link.url} class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
                   {link.name}
                 </a>
               </li>
@@ -61,11 +61,11 @@ const templateVersion = "v1.0.0";
 
         <!-- Resources -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">Resources</h4>
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">技术知识库</h4>
           <ul class="space-y-3">
             {footerLinks.resources.map((link) => (
               <li>
-                <a href={link.url} class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
+                <a href={link.url} class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
                   {link.name}
                 </a>
               </li>
@@ -75,11 +75,11 @@ const templateVersion = "v1.0.0";
 
         <!-- Company -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">Company</h4>
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">品牌服务</h4>
           <ul class="space-y-3">
             {footerLinks.company.map((link) => (
               <li>
-                <a href={link.url} class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
+                <a href={link.url} class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
                   {link.name}
                 </a>
               </li>
@@ -89,11 +89,11 @@ const templateVersion = "v1.0.0";
 
         <!-- Legal -->
         <div>
-          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">Legal</h4>
+          <h4 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 mb-4">服务合规</h4>
           <ul class="space-y-3">
             {footerLinks.legal.map((link) => (
               <li>
-                <a href={link.url} class="text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
+                <a href={link.url} class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 hover:text-primary dark:hover:text-primary-light transition-colors duration-200">
                   {link.name}
                 </a>
               </li>
@@ -105,25 +105,24 @@ const templateVersion = "v1.0.0";
 
     <!-- Bottom bar -->
     <div class="border-t border-dashed border-primary/10 dark:border-primary-dark/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-neutral-400 dark:text-neutral-500">
-        © {currentYear}
-        <a href={siteConfig.url || " "} target="_blank" class="hover:text-primary dark:hover:text-primary-light transition-colors">{siteConfig.author || " "}</a>.
-        Released under the MIT License.
+      <p class="text-xs sm:text-sm text-neutral-400 dark:text-neutral-500">
+        © {currentYear} {siteConfig.title} 品牌官方官网. All rights reserved.
       </p>
 
       <div class="flex items-center gap-4">
         <span class="inline-flex items-center gap-2 text-xs text-neutral-400 dark:text-neutral-500">
           <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full border border-dashed border-primary/30 text-primary/80">
-            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-            {templateVersion}
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            始于 2020
           </span>
-          <span>Built with Astro & Tailwind</span>
+          <span>IEPL 全内网专线架构</span>
         </span>
         <span class="inline-flex justify-center space-x-4">
           {socialLinks.map((social) => (
             <a
               href={social.url}
               target="_blank"
+              rel="nofollow noopener noreferrer"
               class="footer-social-icon-link text-neutral-400 dark:text-neutral-500 hover:text-primary dark:hover:text-primary-light transition-colors duration-200"
               title={social.name}
             >

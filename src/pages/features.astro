@@ -4,234 +4,179 @@ import PageHeader from "@/components/elements/PageHeader.astro";
 import Button from "@/components/ui/Button.astro";
 import { siteConfig } from "@/config/site";
 import {
-  LayoutDashboard, Layers, FileText, Sparkles, Zap, Palette,
-  ArrowRight, Check
+  Globe, CloudLightning, Tv, Sparkles, Monitor, ShieldCheck,
+  ArrowRight, Check, Activity
 } from "@lucide/astro";
 
 const featureModules = [
   {
-    icon: LayoutDashboard,
-    title: "Clean, scalable page structure",
-    desc: "Nine pre-built pages — Home, Features, Pricing, Blog, Changelog, About, Contact, Elements, 404 — wired with consistent hierarchy, spacing, and typography. Add your tenth without re-deciding any of it.",
-    points: ["9 pre-built page templates", "Token-driven spacing (4 / 8 / 12 / 16 / 24 …)", "1200px max-width, 800px inner content", "Mobile-first responsive (375 / 768 / 1024 / 1440)"],
+    icon: Globe,
+    title: "企业级 IEPL / IPLC 物理专线架构",
+    desc: "Nexitally 全线接入国际以太网专线（IEPL）与私有物理信道（IPLC）。跨境传输完全封闭在运营商物理内网光纤内，彻底规避公网国际骨干出口的严重拥堵与路由绕行。",
+    points: [
+      "物理点对点内网直连，不经过公网骨干出口",
+      "晚高峰（20:00 - 23:00）丢包率趋近于 0%",
+      "多地入口双活智能容灾，3秒无缝热备切换",
+      "全链路 99.9% 线路可用性 SLA 企业级承诺"
+    ],
     direction: "left",
-    visual: "wireframe",
+    visual: "network",
   },
   {
-    icon: Layers,
-    title: "Modular, plug-and-play sections",
-    desc: "Every section is a standalone Astro component with a consistent props interface. Reorder Hero, Features, Pricing, Steps, FAQ, FinalCTA without rewriting layout glue.",
-    points: ["15+ reusable section components", "Consistent props API (title, description, items)", "Mix, match, and reorder without conflicts", "Documented in /elements for quick reference"],
+    icon: CloudLightning,
+    title: "全新轻量 VLESS 原生协议",
+    desc: "放弃传统隧道协议臃肿的历史包袱，全面采用轻量高效的 VLESS 现代协议。精简内层重复加密开销，吞吐率相较传统协议提升 30% 以上，让每一次请求更加轻快。",
+    points: [
+      "原生 TLS 1.3 工业级安全标准协议握手",
+      "显著降低高并发请求开销与设备 CPU 负载",
+      "海量小数据包极速响应，实时音视频无感知延迟",
+      "高度拟真现代企业云服务流量特征，抗干扰极强"
+    ],
     direction: "right",
-    visual: "blocks",
+    visual: "protocol",
   },
   {
-    icon: FileText,
-    title: "Content with full MDX support",
-    desc: "Blog and changelog powered by Astro 6 Content Layer. Plain Markdown for prose, imported Astro components for interactive bits. No CMS, no plugin sprawl.",
-    points: ["Astro 6 Content Layer with glob loader", "Component imports inside MDX", "TOC + reading progress + share built-in", "Auto RSS feed at /rss.xml"],
+    icon: Tv,
+    title: "4K / 8K 全球原生流媒体极速秒开",
+    desc: "在香港、台湾、日本、新加坡、美国、英国等核心区域配备优质原生落地 IP，真正实现全区 Netflix、Disney+、YouTube Premium、TikTok 直播的完美解锁与 4K 秒开。",
+    points: [
+      "解锁 Netflix 全区非自制剧与 Dolby Vision 原画",
+      "单节点最高 2.5Gbps 带宽，拖拽 4K 进度条零等待",
+      "TikTok 东南亚与欧美直播推流持续稳定不降帧",
+      "全球十余个主流国家和地区优质原生节点落地"
+    ],
     direction: "left",
-    visual: "mdx",
+    visual: "media",
   },
   {
     icon: Sparkles,
-    title: "Subtle, purposeful animations",
-    desc: "Scroll reveals via AOS, orchestrated entrances via motion.js, and a staggered hero text component. Restraint over spectacle — every animation has a reason.",
-    points: ["AOS scroll reveal with `data-aos-once`", "motion.js for orchestrated timelines", "AnimatedText for hero stagger", "Honors prefers-reduced-motion"],
+    title: "海外 AI 工具与跨境出海特化保障",
+    desc: "针对 OpenAI（ChatGPT 4o）、Anthropic（Claude 3.5）以及 Midjourney 严苛的风控规则，Nexitally 专门建设了低风险分流出口，彻底告别频繁验证码拦截与无故封号。",
+    points: [
+      "精选原生住宅与商业 ISP 落地，欺诈评分极低",
+      "内置专线智能分流规则，精准分流 AI 生产力流量",
+      "长连接流式响应（Streaming）稳定保活绝不卡顿",
+      "满足跨国跨境电商防关联与独立站日常运营"
+    ],
     direction: "right",
-    visual: "motion",
+    visual: "ai",
   },
   {
-    icon: Zap,
-    title: "Fast by default",
-    desc: "Astro ships zero JavaScript by default — interactive islands load only where needed. Tested on Vercel Edge and Cloudflare Pages, scoring Lighthouse 95+ across the board from a fresh install.",
-    points: ["Zero JS by default (Astro Islands)", "Automatic Sharp image optimization", "Static output, deployable anywhere", "Lighthouse 95+ on a fresh install"],
+    icon: Monitor,
+    title: "官方跨平台自研客户端 + 通用生态",
+    desc: "兼顾新手的简单直观与资深极客的深度客制化需求。官方提供多端一键自研客户端，同时无缝兼容 Clash、Shadowrocket、Surge 等成熟的第三方通用订阅。",
+    points: [
+      "Windows / macOS / iOS / Android 官方自研客户端",
+      "一键登录智能探测节点延迟与最快节点优选",
+      "支持 Clash Verge / Shadowrocket / Sing-box 订阅导入",
+      "云端节点配置与分流规则每日全自动同步更新"
+    ],
     direction: "left",
-    visual: "lighthouse",
+    visual: "client",
   },
   {
-    icon: Palette,
-    title: "Token-driven design system",
-    desc: "Colors, fonts, spacing, radii, and motion timing are all CSS custom properties documented in docs/DESIGN.md. Rebrand by editing one file — the rest of the site follows.",
-    points: ["~30 documented CSS tokens", "Tailwind v4 @theme integration", "Built-in dark mode with no flash", "/elements page as live reference"],
+    icon: ShieldCheck,
+    title: "始于 2020 年稳定运营品牌积淀",
+    desc: "自 2020 年创办以来，Nexitally 始终秉持长期主义理念。全节点坚持 1.0x 真实倍率不虚标，坚决不做低质低价超卖与割韭菜套路，以扎实稳定的服务积累了坚实口碑。",
+    points: [
+      "长达数年连续稳定运营，品牌美誉度高",
+      "全节点 ×1.0 真实倍率，流量计量童叟无欺",
+      "全天候 7×24 小时链路监控与自动化运维故障切换",
+      "所有套餐均享不限设备在线，多端自由畅享"
+    ],
     direction: "right",
-    visual: "palette",
+    visual: "reputation",
   },
 ];
 ---
 
 <Layout
-  title="Features — RicoFast"
-  description="Everything you need to build a modern SaaS site. Carefully designed sections and production-ready components."
+  title={`专线架构与核心优势 — ${siteConfig.title} 品牌官方官网`}
+  description="深度解析 Nexitally 企业级 IEPL/IPLC 物理专线、轻量 VLESS 协议、4K 流媒体秒开、海外 AI 工具解锁及自研客户端生态优势。"
 >
   <section class="site-container my-12">
     <PageHeader
-      title="Everything you need to build a modern SaaS site"
-      description="Carefully designed sections, production-ready components, and a layout system that scales with your product."
+      title="企业级专线架构与核心优势"
+      description="从底层海缆专线、现代传输协议到多端客户端生态，全方位保障高标准网络体验。"
     />
   </section>
 
-  <!-- Feature Detail Modules -->
+  <!-- 特性模块列表 -->
   {featureModules.map((mod) => (
-    <section class="py-16 md:py-24 site-container">
+    <section class="py-16 md:py-20 site-container">
       <div class={`flex flex-col ${mod.direction === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16`}>
-        <!-- Text -->
+        <!-- 文本描述 -->
         <div class="flex-1 min-w-0" data-aos={mod.direction === 'right' ? 'fade-left-sm' : 'fade-right-sm'} data-aos-once="true">
-          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
-            <mod.icon class="w-6 h-6 text-primary" />
+          <div class="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-6">
+            <mod.icon class="w-6 h-6 text-primary dark:text-primary-light" />
           </div>
-          <h2 class="text-2xl md:text-3xl font-brand mb-4">{mod.title}</h2>
-          <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6">{mod.desc}</p>
+          <h2 class="text-2xl md:text-3xl font-brand font-bold mb-4 text-neutral-800 dark:text-neutral-100">{mod.title}</h2>
+          <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed mb-6 text-sm md:text-base">{mod.desc}</p>
           <ul class="space-y-3">
             {mod.points.map((point) => (
-              <li class="flex items-start gap-2">
-                <Check class="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <span class="text-sm text-neutral-600 dark:text-neutral-300">{point}</span>
+              <li class="flex items-start gap-2.5">
+                <Check class="w-4 h-4 text-emerald-500 mt-1 flex-shrink-0" />
+                <span class="text-sm text-neutral-600 dark:text-neutral-300 font-medium">{point}</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <!-- Visual -->
+        <!-- 视觉展示卡片 -->
         <div class="flex-1 min-w-0 w-full" data-aos={mod.direction === 'right' ? 'fade-right-sm' : 'fade-left-sm'} data-aos-delay="200" data-aos-once="true">
-          <div class="relative rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/10 dark:border-neutral-700 h-[280px] md:h-[340px] overflow-hidden p-6">
+          <div class="relative rounded-2xl bg-bg-secondary dark:bg-bg-secondary-dark border border-primary/15 dark:border-neutral-700 h-[260px] md:h-[320px] overflow-hidden p-6 flex flex-col justify-between shadow-sm">
+            <div class="flex items-center justify-between border-b border-dashed border-primary/10 dark:border-neutral-700 pb-3">
+              <span class="text-xs font-mono font-semibold text-primary dark:text-primary-light flex items-center gap-1.5">
+                <Activity class="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
+                Nexitally Backbone Protocol
+              </span>
+              <span class="text-[11px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 font-mono">
+                99.9% Uptime
+              </span>
+            </div>
 
-            <!-- 1. Page wireframe -->
-            {mod.visual === "wireframe" && (
-              <div class="h-full flex flex-col gap-2.5">
-                <div class="h-5 rounded-md border border-dashed border-primary/30 flex items-center px-2 gap-1.5">
-                  <div class="w-2 h-2 rounded-full bg-primary/40"></div>
-                  <div class="flex-1"></div>
-                  <div class="w-6 h-1 rounded-full bg-primary/30"></div>
-                  <div class="w-6 h-1 rounded-full bg-primary/30"></div>
-                  <div class="w-6 h-1 rounded-full bg-primary/30"></div>
-                </div>
-                <div class="h-16 rounded-md border border-dashed border-primary/30 bg-primary/5 flex items-center justify-center">
-                  <div class="text-[9px] uppercase tracking-wider text-primary/60">Hero</div>
-                </div>
-                <div class="grid grid-cols-3 gap-2 flex-1">
-                  <div class="rounded-md border border-dashed border-primary/30 bg-primary/5"></div>
-                  <div class="rounded-md border border-dashed border-primary/30 bg-primary/5"></div>
-                  <div class="rounded-md border border-dashed border-primary/30 bg-primary/5"></div>
-                </div>
-                <div class="h-10 rounded-md border border-dashed border-primary/30 bg-accent/10"></div>
+            <div class="space-y-2.5 my-auto">
+              <div class="p-3 rounded-xl bg-bg-primary/50 dark:bg-neutral-800/50 border border-primary/10 dark:border-neutral-700 text-xs flex justify-between items-center">
+                <span class="text-neutral-500 dark:text-neutral-400">国际专线类型</span>
+                <span class="font-mono font-medium text-neutral-800 dark:text-neutral-200">IEPL / IPLC 纯内网物理信道</span>
               </div>
-            )}
-
-            <!-- 2. Modular blocks -->
-            {mod.visual === "blocks" && (
-              <div class="h-full relative flex items-center justify-center">
-                <div class="absolute top-4 left-4 w-28 h-20 rounded-xl border border-dashed border-primary/40 bg-primary/10 rotate-[-6deg] shadow-sm flex items-center justify-center">
-                  <span class="text-[10px] uppercase tracking-wider text-primary/70">Hero</span>
-                </div>
-                <div class="relative w-32 h-24 rounded-xl border border-dashed border-primary/50 bg-bg-secondary dark:bg-bg-secondary-dark shadow-md flex items-center justify-center z-10">
-                  <span class="text-[10px] uppercase tracking-wider text-primary">Features</span>
-                </div>
-                <div class="absolute bottom-4 right-4 w-28 h-20 rounded-xl border border-dashed border-accent/50 bg-accent/15 rotate-[8deg] shadow-sm flex items-center justify-center">
-                  <span class="text-[10px] uppercase tracking-wider text-amber-700/80 dark:text-amber-300/80">Pricing</span>
-                </div>
-                <div class="absolute top-12 right-10 w-20 h-14 rounded-xl border border-dashed border-primary/30 bg-bg-primary/40 dark:bg-neutral-900/40 rotate-[-4deg] shadow-sm flex items-center justify-center">
-                  <span class="text-[9px] uppercase tracking-wider text-primary/50">FAQ</span>
-                </div>
+              <div class="p-3 rounded-xl bg-bg-primary/50 dark:bg-neutral-800/50 border border-primary/10 dark:border-neutral-700 text-xs flex justify-between items-center">
+                <span class="text-neutral-500 dark:text-neutral-400">核心传输协议</span>
+                <span class="font-mono font-medium text-neutral-800 dark:text-neutral-200">VLESS + XTLS 原生极速加速</span>
               </div>
-            )}
-
-            <!-- 3. MDX code -->
-            {mod.visual === "mdx" && (
-              <div class="h-full font-mono text-[11px] leading-relaxed text-neutral-600 dark:text-neutral-300 overflow-hidden">
-                <div class="text-neutral-400">---</div>
-                <div><span class="text-primary">title</span>: <span class="text-emerald-600 dark:text-emerald-400">"Launching v1.2"</span></div>
-                <div><span class="text-primary">publishDate</span>: 2026-03-18</div>
-                <div><span class="text-primary">tags</span>: [<span class="text-emerald-600 dark:text-emerald-400">"Release"</span>]</div>
-                <div class="text-neutral-400">---</div>
-                <div class="mt-2"><span class="text-amber-600 dark:text-amber-400">## What's new</span></div>
-                <div class="mt-1">Three months after v1, RicoFast</div>
-                <div>v1.2 ships today.</div>
-                <div class="mt-2 text-purple-600 dark:text-purple-400">&lt;Callout type="success"&gt;</div>
-                <div class="pl-4">Lighthouse 95+ across the board</div>
-                <div class="text-purple-600 dark:text-purple-400">&lt;/Callout&gt;</div>
+              <div class="p-3 rounded-xl bg-bg-primary/50 dark:bg-neutral-800/50 border border-primary/10 dark:border-neutral-700 text-xs flex justify-between items-center">
+                <span class="text-neutral-500 dark:text-neutral-400">单节点峰值吞吐</span>
+                <span class="font-mono font-medium text-emerald-600 dark:text-emerald-400">2.5 Gbps (真实 1.0x 倍率)</span>
               </div>
-            )}
+            </div>
 
-            <!-- 4. Motion -->
-            {mod.visual === "motion" && (
-              <div class="h-full relative flex items-center justify-center">
-                <div class="absolute w-24 h-24 rounded-2xl border border-primary/20 bg-primary/5 translate-x-[-32px] translate-y-[-24px] opacity-30"></div>
-                <div class="absolute w-24 h-24 rounded-2xl border border-primary/30 bg-primary/10 translate-x-[-16px] translate-y-[-12px] opacity-60"></div>
-                <div class="absolute w-24 h-24 rounded-2xl border border-primary/50 bg-primary/20 shadow-md"></div>
-                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
-                  <Sparkles class="w-3 h-3 text-primary" />
-                  <span class="text-[10px] uppercase tracking-wider text-primary">Staggered entrance</span>
-                </div>
-              </div>
-            )}
-
-            <!-- 5. Lighthouse -->
-            {mod.visual === "lighthouse" && (
-              <div class="h-full flex flex-col">
-                <div class="grid grid-cols-4 gap-3 flex-1 items-center">
-                  {[
-                    { label: "Perf", value: 98, color: "text-emerald-500" },
-                    { label: "A11y", value: 90, color: "text-emerald-500" },
-                    { label: "Best", value: 100, color: "text-emerald-500" },
-                    { label: "SEO", value: 95, color: "text-emerald-500" },
-                  ].map((m) => (
-                    <div class="flex flex-col items-center gap-2">
-                      <div class="relative w-14 h-14 rounded-full border-2 border-emerald-500/30 bg-emerald-500/5 flex items-center justify-center">
-                        <span class={`text-base font-brand ${m.color}`}>{m.value}</span>
-                      </div>
-                      <span class="text-[10px] uppercase tracking-wider text-neutral-500 dark:text-neutral-400">{m.label}</span>
-                    </div>
-                  ))}
-                </div>
-                <div class="mt-4 flex items-center justify-center gap-1.5">
-                  <Zap class="w-3 h-3 text-primary" />
-                  <span class="text-[10px] uppercase tracking-wider text-primary">Lighthouse · Home page</span>
-                </div>
-              </div>
-            )}
-
-            <!-- 6. Palette -->
-            {mod.visual === "palette" && (
-              <div class="h-full flex flex-col gap-3">
-                <div class="flex gap-2">
-                  <div class="flex-1 rounded-lg" style="background: #2d6dc3; height: 56px;"></div>
-                  <div class="flex-1 rounded-lg" style="background: #0066ff; height: 56px;"></div>
-                  <div class="flex-1 rounded-lg" style="background: #8fb9ff; height: 56px;"></div>
-                  <div class="flex-1 rounded-lg" style="background: #fad13b; height: 56px;"></div>
-                  <div class="flex-1 rounded-lg" style="background: #faeb75; height: 56px;"></div>
-                </div>
-                <div class="flex-1 rounded-lg border border-primary/10 dark:border-neutral-700 bg-bg-primary/40 dark:bg-neutral-800/40 p-3 font-mono text-[10px] leading-snug">
-                  <div class="text-neutral-400">@theme &#123;</div>
-                  <div class="pl-3"><span class="text-primary">--color-primary</span>: <span class="text-amber-600 dark:text-amber-400">#2d6dc3</span>;</div>
-                  <div class="pl-3"><span class="text-primary">--color-accent</span>: <span class="text-amber-600 dark:text-amber-400">#fad13b</span>;</div>
-                  <div class="pl-3"><span class="text-primary">--font-brand</span>: Instrument Serif;</div>
-                  <div class="text-neutral-400">&#125;</div>
-                </div>
-              </div>
-            )}
-
+            <div class="text-[11px] text-neutral-400 flex items-center justify-between">
+              <span>* 节点状态每分钟全自动容灾自检</span>
+              <span class="text-primary hover:underline cursor-pointer">
+                <a href={siteConfig.registerUrl} target="_blank" rel="nofollow noopener noreferrer">立即体验 &rarr;</a>
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </section>
   ))}
 
-  <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-4 site-container"></div>
-
-  <!-- CTA -->
+  <!-- 底部开通引导 -->
   <section class="py-16 md:py-24 site-container" data-aos="fade-up-xs" data-aos-once="true">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-brand mb-4">See it in action</h2>
-      <p class="text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed">
-        Browse the live demo, then fork the repo when you're ready to make it yours.
+    <div class="p-8 md:p-14 rounded-3xl bg-gradient-to-b from-bg-secondary to-bg-primary dark:from-bg-secondary-dark dark:to-neutral-900 border border-primary/20 text-center max-w-4xl mx-auto shadow-md">
+      <h2 class="text-3xl md:text-4xl font-brand font-bold mb-4 text-neutral-900 dark:text-white">
+        准备好体验企业级低延迟网络了吗？
+      </h2>
+      <p class="text-neutral-600 dark:text-neutral-300 max-w-xl mx-auto mb-8 text-sm md:text-base leading-relaxed">
+        只需一键注册，即可在 Windows、Mac、iOS、Android 以及第三方客户端上畅享 Nexitally 极速专线。
       </p>
       <div class="flex flex-wrap justify-center gap-3">
-        <Button url="/" type="fill" className="text-lg px-8 py-3">
-          View Live Demo <ArrowRight size={18} />
+        <Button url={siteConfig.registerUrl} target="_blank" type="fill" className="text-base px-8 py-3.5">
+          立即开通账号 <ArrowRight size={16} />
         </Button>
-        <Button url={siteConfig.social.github} className="text-lg px-8 py-3" target="_blank">
-          Get Template
+        <Button url="/#pricing" className="text-base px-8 py-3.5">
+          查看全部套餐方案
         </Button>
       </div>
     </div>

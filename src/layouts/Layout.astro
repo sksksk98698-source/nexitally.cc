@@ -1,21 +1,34 @@
 ---
 import Meta from './Meta.astro';
-import TopBg from "@/components/ui/TopBg.astro";
 import Footer from "@/components/sections/Footer.astro";
 import Header from "@/components/sections/Header.astro";
 import TrackGa from "@/components/widgets/TrackGa.astro";
+
 interface Props {
-	title?: string | undefined;
-	description?: string | undefined;
-	keywords?: string | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  keywords?: string | undefined;
+  robots?: string | undefined;
+  noindex?: boolean | undefined;
+  canonical?: string | false | undefined;
+  articleSchema?: {
+    publishDate?: Date | string;
+    modifiedDate?: Date | string;
+    tags?: string[];
+  };
+  faqSchema?: Array<{ question: string; answer: string }> | undefined;
 }
 
 const {
-	title,
-	description,
-	keywords
+  title,
+  description,
+  keywords,
+  robots,
+  noindex,
+  canonical,
+  articleSchema,
+  faqSchema
 } = Astro.props;
-
 
 import "../styles/global.css";
 import "aos/dist/aos.css";
@@ -24,13 +37,18 @@ import '../styles/article.css';
 import '../styles/article-enhancements.css';
 ---
 
-<html lang="">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <Meta
-      title = {title}
-      description = {description}
-      keywords = {keywords}
+      title={title}
+      description={description}
+      keywords={keywords}
+      robots={robots}
+      noindex={noindex}
+      canonical={canonical}
+      articleSchema={articleSchema}
+      faqSchema={faqSchema}
     />
     <TrackGa />
     <!-- Used to add dark mode right away, adding here prevents any flicker -->
@@ -44,14 +62,13 @@ import '../styles/article-enhancements.css';
         }
       }
     </script>
-
-    <link rel="icon" type="image/x-icon" href="/favicon.png" />
   </head>
   <body class="antialiased bg-bg-primary dark:bg-bg-primary-dark max-w-full overflow-x-hidden">
-    <TopBg />
+    <slot name="top-bg" />
     <Header />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <Footer />
-    <script src="../assets/js/main.js"></script>
   </body>
 </html>

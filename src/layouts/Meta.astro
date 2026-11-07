@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '@/config/site.js';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -7,39 +8,204 @@ export interface Props {
   url?: string;
   ogImage?: string;
   twitterHandle?: string;
+  robots?: string;
+  noindex?: boolean;
+  canonical?: string | false;
+  articleSchema?: {
+    publishDate?: Date | string;
+    modifiedDate?: Date | string;
+    tags?: string[];
+  };
+  faqSchema?: Array<{ question: string; answer: string }>;
 }
 
 const {
-  title,
-  description,
-  keywords = "",
-  url = siteConfig.url, //
+  title = siteConfig.meta.title,
+  description = siteConfig.meta.description,
+  keywords,
   ogImage = "/og.jpg",
-  twitterHandle = siteConfig.social.twitterName || '',
+  twitterHandle = siteConfig.meta.twitterHandle || siteConfig.social.twitterName || '',
+  robots,
+  noindex = false,
+  canonical,
+  articleSchema,
+  faqSchema,
 } = Astro.props;
+
+// Dynamically compute canonical URL based on current Astro route
+const siteBase = Astro.site ? Astro.site.toString().replace(/\/$/, '') : siteConfig.url.replace(/\/$/, '');
+const pathname = Astro.url.pathname === '/' ? '' : Astro.url.pathname.replace(/\/$/, '');
+const canonicalURL = typeof canonical === 'string' ? canonical : `${siteBase}${pathname}`;
+const fullOgImageUrl = ogImage.startsWith('http') ? ogImage : `${siteBase}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`;
+
+const robotsContent = robots || (noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
+
+// Webmaster platform verifications
+const googleVerification = siteConfig.webmaster?.google || '';
+const bingVerification = siteConfig.webmaster?.bing || '';
+const baiduVerification = siteConfig.webmaster?.baidu || '';
+const shenmaVerification = siteConfig.webmaster?.shenma || '';
+
+// Structured data for SEO (Schema.org)
+const graphList: any[] = [
+  {
+    "@type": "WebSite",
+    "@id": `${siteBase}/#website`,
+    "url": `${siteBase}/`,
+    "name": siteConfig.title,
+    "description": siteConfig.meta.description,
+    "inLanguage": "zh-CN",
+    "publisher": {
+      "@id": `${siteBase}/#organization`
+    }
+  },
+  {
+    "@type": "Organization",
+    "@id": `${siteBase}/#organization`,
+    "name": siteConfig.title,
+    "url": `${siteBase}/`,
+    "email": siteConfig.mail,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteBase}/assets/logo.png`
+    }
+  }
+];
+
+// Breadcrumbs
+if (pathname) {
+  if (articleSchema) {
+    graphList.push({
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalURL}#breadcrumb`,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "官网首页",
+          "item": `${siteBase}/`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "配置教程与知识库",
+          "item": `${siteBase}/blog`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": title,
+          "item": canonicalURL
+        }
+      ]
+    });
+  } else {
+    graphList.push({
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalURL}#breadcrumb`,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "官网首页",
+          "item": `${siteBase}/`
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": title,
+          "item": canonicalURL
+        }
+      ]
+    });
+  }
+}
+
+if (articleSchema) {
+  graphList.push({
+    "@type": "TechArticle",
+    "@id": `${canonicalURL}#article`,
+    "isPartOf": { "@id": `${siteBase}/#website` },
+    "headline": title,
+    "description": description,
+    "datePublished": articleSchema.publishDate ? new Date(articleSchema.publishDate).toISOString() : undefined,
+    "dateModified": articleSchema.modifiedDate ? new Date(articleSchema.modifiedDate).toISOString() : (articleSchema.publishDate ? new Date(articleSchema.publishDate).toISOString() : undefined),
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": canonicalURL,
+    "author": {
+      "@type": "Organization",
+      "name": "Nexitally 核心技术与基础设施团队",
+      "url": `${siteBase}/about`
+    },
+    "publisher": {
+      "@id": `${siteBase}/#organization`
+    }
+  });
+}
+
+if (faqSchema && faqSchema.length > 0) {
+  graphList.push({
+    "@type": "FAQPage",
+    "@id": `${canonicalURL}#faq`,
+    "mainEntity": faqSchema.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  });
+}
+
+const schemaOrgJSONLD = {
+  "@context": "https://schema.org",
+  "@graph": graphList
+};
 ---
 
 <!-- Meta Tags -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 <title>{title}</title>
 <meta name="description" content={description} />
-<meta name="keywords" content={keywords} />
+{keywords && <meta name="keywords" content={keywords} />}
 <meta name="author" content={siteConfig.author} />
+<meta name="robots" content={robotsContent} />
+{canonical !== false && !noindex && <link rel="canonical" href={canonicalURL} />}
+
+<!-- Webmaster Verification Meta Tags -->
+{googleVerification && <meta name="google-site-verification" content={googleVerification} />}
+{bingVerification && <meta name="msvalidate.01" content={bingVerification} />}
+{baiduVerification && <meta name="baidu-site-verification" content={baiduVerification} />}
+{shenmaVerification && <meta name="shenma-site-verification" content={shenmaVerification} />}
+
+<!-- Favicon & Icons -->
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
 
 <!-- Open Graph Tags -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={articleSchema ? "article" : "website"} />
+<meta property="og:locale" content="zh_CN" />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:url" content={url} />
-<meta property="og:image" content={ogImage} />
-<meta property="og:site_name" content={title} />
+{canonical !== false && !noindex && <meta property="og:url" content={canonicalURL} />}
+<meta property="og:image" content={fullOgImageUrl} />
+<meta property="og:site_name" content={siteConfig.title} />
+{articleSchema?.publishDate && (
+  <meta property="article:published_time" content={new Date(articleSchema.publishDate).toISOString()} />
+)}
+{articleSchema?.modifiedDate && (
+  <meta property="article:modified_time" content={new Date(articleSchema.modifiedDate).toISOString()} />
+)}
 
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={ogImage} />
-<meta name="twitter:site" content={twitterHandle} />
-<meta name="twitter:creator" content={twitterHandle} />
+<meta name="twitter:image" content={fullOgImageUrl} />
+{twitterHandle && <meta name="twitter:site" content={twitterHandle} />}
+{twitterHandle && <meta name="twitter:creator" content={twitterHandle} />}
+
+<!-- Structured Data -->
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schemaOrgJSONLD)} />

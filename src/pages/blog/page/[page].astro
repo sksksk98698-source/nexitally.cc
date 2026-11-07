@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import PageHeader from "@/components/elements/PageHeader.astro";
 import BlogSection from "@/components/sections/BlogSection.astro";
 import { getCollection } from "astro:content";
+import { siteConfig } from "@/config/site";
 
 export const POSTS_PER_PAGE = 6;
 
@@ -18,7 +19,7 @@ export async function getStaticPaths() {
     posts = posts.filter((post) => post.data.featured !== true);
   }
 
-  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+  const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE) || 1;
 
   return Array.from({ length: totalPages }, (_, i) => {
     const page = i + 1;
@@ -33,17 +34,20 @@ const { page } = Astro.props;
 const currentPage = parseInt(page);
 ---
 
-<Layout title={`Blog — RicoFast`} description="Latest articles, updates, and insights from the RicoFast team.">
+<Layout
+  title={`技术知识库 (第 ${currentPage} 页) — ${siteConfig.title} 品牌官方官网`}
+  description={`浏览 Nexitally 知识库技术文章与使用指南第 ${currentPage} 页。`}
+>
   <section class="relative z-20 container mx-auto my-12 px-7 lg:px-0">
     <PageHeader
-      title="Blog"
-      description="Latest articles, updates, and insights."
+      title="技术知识库与客户端教程"
+      description="为您提供官方客户端一键连接指南、主流第三方订阅导入手册与高标准专线网络最佳实践。"
     />
   </section>
   <section class="relative z-20 mx-auto my-12 px-7 lg:px-0">
-    <div class="mt-12">
+    <div class="mt-8">
       <BlogSection
-        title="All Articles"
+        title="全部技术文章"
         listPage={true}
         pagination={{
           enable: true,

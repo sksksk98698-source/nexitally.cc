@@ -5,74 +5,94 @@ import PricingSection from "@/components/sections/Pricing.astro";
 import AccordionItem from "@/components/ui/AccordionItem.astro";
 import Button from "@/components/ui/Button.astro";
 import { siteConfig } from "@/config/site";
-import { Check, X, ArrowRight } from "@lucide/astro";
+import { Check, X, ArrowRight, Sparkles } from "@lucide/astro";
 
+// 四大套餐维度对照表
 const comparisonFeatures = [
-  { name: "Projects", free: "1", pro: "Unlimited", enterprise: "Unlimited" },
-  { name: "Page templates", free: "Basic", pro: "Full", enterprise: "Full + Custom" },
-  { name: "Components", free: "Core", pro: "Full library", enterprise: "Full + Custom" },
-  { name: "Customization", free: "Limited", pro: "Full", enterprise: "Advanced" },
-  { name: "Animations", free: "Basic AOS", pro: "Full motion.js", enterprise: "Full + Custom" },
-  { name: "Support", free: "Community", pro: "Email (1 biz day)", enterprise: "Priority (same day)" },
-  { name: "Custom domain", free: false, pro: true, enterprise: true },
-  { name: "Team seats", free: "1", pro: "3", enterprise: "10+" },
-  { name: "SSO + audit log", free: false, pro: false, enterprise: true },
-  { name: "SLA", free: false, pro: false, enterprise: "99.9%" },
+  { name: "标价与周期", snooker: "¥147 一次性", light: "¥99 / 年", speed: "¥25 / 月", custom: "¥680 / 月" },
+  { name: "均摊月成本", snooker: "一次买断永不过期", light: "约 8.25 元/月", speed: "支持长周期折扣", custom: "商务独立核算" },
+  { name: "流量规格", snooker: "247 GB 永久流量", light: "69 GB / 月", speed: "168 GB / 月 (x1.0)", custom: "500 GB / 月 (可扩容)" },
+  { name: "专线架构", snooker: "原生稳定节点", light: "原生稳定专线", speed: "全球 IPLC 专线", custom: "独享内网 IPLC 专线" },
+  { name: "单节点最高速率", snooker: "2.5 Gbps", light: "2.5 Gbps", speed: "2.5 Gbps", custom: "2.5 Gbps 独享带宽" },
+  { name: "设备数量限制", snooker: "不限在线设备", light: "不限在线设备", speed: "不限在线设备", custom: "不限在线设备" },
+  { name: "主流节点覆盖", snooker: "港/台/日/新/美等全球", light: "港/台/日/新/马/美/英等", speed: "全量十国核心节点", custom: "全球多大区按需配置" },
+  { name: "AI 工具全面解锁", snooker: true, light: true, speed: true, custom: true },
+  { name: "Netflix / Disney+ 4K", snooker: true, light: true, speed: true, custom: true },
+  { name: "TikTok 跨境电商推流", snooker: true, light: false, speed: true, custom: true },
+  { name: "专属原生住宅 IP 隔离", snooker: false, light: false, speed: false, custom: true },
+  { name: "7×24 小时技术保障", snooker: true, light: true, speed: true, custom: true },
 ];
 
-const faqItems = [
-  { question: "Is there a free trial on Pro?", answer: "Yes — Pro includes a 7-day free trial. No credit card required to start; we'll only ask for billing details when the trial ends." },
-  { question: "What's your refund policy?", answer: "14-day money-back guarantee on all paid plans, no questions asked. Email hello@ricoui.com within 14 days of the charge and we'll process the refund within 2 business days." },
-  { question: "Can I upgrade or downgrade later?", answer: "Anytime. Upgrades take effect immediately and we prorate the difference. Downgrades take effect at the end of the current billing period, so you keep paid features until then." },
-  { question: "How does team billing work?", answer: "Pro includes 3 seats and Enterprise starts at 10 seats. Additional seats are $9/seat/month on Pro and $19/seat/month on Enterprise, billed on the same cycle as your main subscription." },
+const pricingFaq = [
+  {
+    question: "轻量版的 8.25 元/月是如何计算的？",
+    answer: "8.25 元/月是按年付 99 元除以 12 个月折算得出的单月成本。该套餐适合日常轻度办公、海外文献检索、外贸收发邮件和轻度视频浏览，年付即可省去每月续费的繁琐。"
+  },
+  {
+    question: "斯诺克 147 永久套餐真的不会过期吗？",
+    answer: "是的。致敬斯诺克 147 永久套餐属于一次性买断制，247GB 流量没有到期时限，用完即止。如果用完可以随时重置或额外补流量，非常适合作为长久在手的主力或应急备用线路。"
+  },
+  {
+    question: "极速版的长周期折扣规则是什么？",
+    answer: "极速版支持周期递进折扣：半年付立享 9 折、年付立享 8 折、两年付立享 75 折、三年付立享 7 折。所有周期均享全节点 1.0x 真实倍率和 2.5Gbps 最高速率。"
+  },
+  {
+    question: "企业定制版如何开通与部署？",
+    answer: "定制版专为跨境电商防关联、TikTok 机构直播推流、跨境大带宽传输量身打造。请在下单后联系官方客服一对一确认线路覆盖地区（香港、日本、美国、新加坡等）以及专属独立原生 IP 的分配。"
+  },
 ];
 ---
 
 <Layout
-  title="Pricing — RicoFast"
-  description="Simple, transparent pricing. Choose a plan that fits your stage."
+  title={`套餐方案详情 — ${siteConfig.title} 品牌官方官网`}
+  description="Nexitally 全系套餐详尽参数对比。斯诺克147永久买断、轻量版年付99元、旗舰极速版月付25元与企业定制专线。"
 >
   <section class="site-container my-12">
     <PageHeader
-      title="Simple, transparent pricing"
-      description="Choose a plan that fits your stage. Upgrade anytime as you grow."
+      title="官方授权透明套餐方案"
+      description="拒绝复杂套路与虚假倍率。全系采用 IEPL / IPLC 专线与 VLESS 协议，满足个人与企业高标准网络需求。"
     />
-    <p class="text-center text-xs text-neutral-400 dark:text-neutral-500 mt-6 italic">
-      Demo pricing — replace with your own plans. The RicoFast template itself is free and MIT-licensed.
-    </p>
   </section>
 
+  <!-- 套餐卡片展示 -->
   <PricingSection showHeader={false} />
 
   <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-8 site-container"></div>
 
-  <!-- Feature Comparison -->
-  <section class="site-container py-16 md:py-24" data-aos="fade-up-xs" data-aos-once="true">
-    <h2 class="text-3xl font-brand text-center mb-8">Compare plans</h2>
-    <div class="max-w-4xl mx-auto overflow-x-auto">
-      <table class="w-full">
+  <!-- 详细功能对比表 -->
+  <section class="site-container py-16 md:py-20" data-aos="fade-up-xs" data-aos-once="true">
+    <h2 class="text-2xl md:text-3xl font-brand font-bold text-center mb-4 text-neutral-800 dark:text-neutral-100">
+      四大套餐核心规格详细横向对比
+    </h2>
+    <p class="text-center text-xs text-neutral-500 dark:text-neutral-400 mb-10 max-w-xl mx-auto">
+      全部套餐直连官方核心集群，无任何公网劣质中转，标配全平台客户端生态支持。
+    </p>
+
+    <div class="max-w-5xl mx-auto overflow-x-auto rounded-2xl border border-primary/10 dark:border-neutral-700 bg-bg-secondary/40 dark:bg-bg-secondary-dark/40 p-4 sm:p-6">
+      <table class="w-full text-xs sm:text-sm">
         <thead>
           <tr class="border-b border-dashed border-neutral-200 dark:border-neutral-700">
-            <th class="text-left py-4 pr-8 text-sm font-medium text-neutral-500">Feature</th>
-            <th class="text-center py-4 px-4 text-sm font-medium text-neutral-500">Free</th>
-            <th class="text-center py-4 px-4 text-sm font-medium text-primary">Pro</th>
-            <th class="text-center py-4 px-4 text-sm font-medium text-neutral-500">Enterprise</th>
+            <th class="text-left py-4 pr-4 font-semibold text-neutral-600 dark:text-neutral-300">指标参数</th>
+            <th class="text-center py-4 px-2 font-semibold text-neutral-800 dark:text-neutral-200">斯诺克 147</th>
+            <th class="text-center py-4 px-2 font-semibold text-neutral-800 dark:text-neutral-200">轻量版</th>
+            <th class="text-center py-4 px-2 font-semibold text-primary dark:text-primary-light">极速版 (推荐)</th>
+            <th class="text-center py-4 px-2 font-semibold text-neutral-800 dark:text-neutral-200">企业定制版</th>
           </tr>
         </thead>
         <tbody>
-          {comparisonFeatures.map((feature) => (
-            <tr class="border-b border-dashed border-neutral-100 dark:border-neutral-800">
-              <td class="py-4 pr-8 text-sm text-neutral-700 dark:text-neutral-300">{feature.name}</td>
-              {[feature.free, feature.pro, feature.enterprise].map((val) => (
-                <td class="text-center py-4 px-4">
+          {comparisonFeatures.map((row) => (
+            <tr class="border-b border-dashed border-neutral-200/50 dark:border-neutral-700/50 hover:bg-primary/5 transition-colors">
+              <td class="py-3.5 pr-4 font-medium text-neutral-700 dark:text-neutral-300">{row.name}</td>
+              {[row.snooker, row.light, row.speed, row.custom].map((val) => (
+                <td class="text-center py-3.5 px-2">
                   {typeof val === 'boolean' ? (
                     val ? (
-                      <Check class="w-4 h-4 text-primary mx-auto" />
+                      <Check class="w-4 h-4 text-emerald-500 mx-auto" />
                     ) : (
                       <X class="w-4 h-4 text-neutral-300 dark:text-neutral-600 mx-auto" />
                     )
                   ) : (
-                    <span class="text-sm text-neutral-600 dark:text-neutral-300">{val}</span>
+                    <span class="text-neutral-600 dark:text-neutral-300 font-mono text-xs">{val}</span>
                   )}
                 </td>
               ))}
@@ -85,31 +105,33 @@ const faqItems = [
 
   <div class="w-full border-b border-dashed border-neutral-200 dark:border-neutral-700 my-8 site-container"></div>
 
-  <!-- Pricing FAQ -->
-  <section class="py-16 md:py-24 site-container">
-    <h2 class="text-3xl font-brand text-center mb-8">Pricing FAQ</h2>
+  <!-- 答疑板块 -->
+  <section class="py-16 md:py-20 site-container">
+    <h2 class="text-2xl md:text-3xl font-brand font-bold text-center mb-8 text-neutral-800 dark:text-neutral-100">
+      套餐选购常见疑问
+    </h2>
     <div class="max-w-2xl mx-auto" data-aos="fade-up-xs" data-aos-once="true">
-      {faqItems.map((item, index) => (
+      {pricingFaq.map((item, index) => (
         <AccordionItem question={item.question} answer={item.answer} index={index} />
       ))}
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-16 md:py-24 site-container" data-aos="fade-up-xs" data-aos-once="true">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl md:text-4xl font-brand mb-4">Not sure which plan?</h2>
-      <p class="text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed">
-        Start on Free, upgrade when you outgrow it. Most teams switch to Pro within their first month.
+  <!-- 底部开通引导条 -->
+  <section class="py-16 site-container" data-aos="fade-up-xs" data-aos-once="true">
+    <div class="p-8 md:p-12 rounded-3xl bg-bg-secondary dark:bg-bg-secondary-dark border border-dashed border-primary/25 text-center max-w-3xl mx-auto">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-primary bg-primary/10 mb-4">
+        <Sparkles class="w-3.5 h-3.5" /> 官方授权认证系统
+      </span>
+      <h3 class="text-2xl md:text-3xl font-brand font-bold text-neutral-900 dark:text-white mb-3">
+        立即选择契合您的专线方案
+      </h3>
+      <p class="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-6 leading-relaxed">
+        支持支付宝、微信等多种便捷支付方式，付款后立即下发节点配置与自研客户端授权。
       </p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <Button url={siteConfig.social.github} type="fill" className="text-lg px-8 py-3">
-          Start free <ArrowRight size={18} />
-        </Button>
-        <Button url="/contact" className="text-lg px-8 py-3">
-          Talk to sales
-        </Button>
-      </div>
+      <Button url={siteConfig.registerUrl} target="_blank" type="fill" className="mx-auto text-base px-8 py-3.5">
+        前往官方控制台开通 <ArrowRight size={16} />
+      </Button>
     </div>
   </section>
 </Layout>

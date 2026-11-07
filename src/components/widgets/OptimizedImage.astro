@@ -46,6 +46,9 @@ let {
   ...rest
 } = Astro.props;
 
+const imageWidth = width !== undefined ? (typeof width === 'number' ? width : Number(width) || undefined) : undefined;
+const imageHeight = height !== undefined ? (typeof height === 'number' ? height : Number(height) || undefined) : undefined;
+
 const isRemoteImage = src.startsWith("http://") || src.startsWith("https://");
 let image = src as any;
 let SVG = "" as any;
@@ -53,30 +56,31 @@ let SVG = "" as any;
 if (!isRemoteImage) {
   // Regular Images
   const images = import.meta.glob([
-    "/src/assets/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg,gif}",
-    "/public/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg,gif}",
-    "/src/content/**/*.{jpeg,jpg,png,avif,tiff,gif,webp,svg,gif}",
-  ]);
+    "../../assets/**/*.{jpeg,jpg,png,gif,webp}",
+    "../../../public/**/*.{jpeg,jpg,png,gif,webp}",
+    "../../content/**/*.{jpeg,jpg,png,gif,webp}",
+  ]) as any;
 
-  // Get Raw Image For Inline SVG
-  const imagesRaw = import.meta.glob(
-    [
-      "/src/assets/**/*.svg",
-      "/src/content/**/*.svg",
-      "/public/**/*.svg",
-    ],
-    {
-      query: "raw",
-      import: "default",
-    },
-  );
-
+  // Inline SVGs
   if (inlineSvg && src.includes(".svg")) {
-    const key = Object.keys(images).find((k) => k.includes(src));
-    SVG = key ? await imagesRaw[key]() : null;
+    const svgs = import.meta.glob(
+      [
+        "../../assets/**/*.svg",
+        "../../../public/**/*.svg",
+        "../../content/**/*.svg",
+      ],
+      {
+        query: "?raw",
+        import: "default",
+      }
+    ) as any;
 
-    if (SVG.length > 1) {
-      SVG = SVG.split("<svg"); // Split at the opening <svg> tag
+    const key = Object.keys(svgs).find((k) => k.includes(src));
+    SVG = key ? await svgs[key]() : null;
+
+    if (SVG) {
+      // Split the SVG into two parts: before and after the opening <svg tag
+      SVG = SVG.split("<svg");
 
       if (SVG.length > 1) {
         // Convert rest object to a string of attributes
@@ -104,13 +108,12 @@ if (!isRemoteImage) {
   inlineSvg && SVG && src.includes(".svg") ? (
     <Fragment set:html={SVG} />
   ) : image ? (
-    // @ts-expect-error
+    // @ts-ignore
     <Image
       style={style}
       alt={alt || ""}
-      width={width}
-      height={height}
-      formats={formats}
+      width={imageWidth}
+      height={imageHeight}
       loading={loading}
       decoding={decoding}
       src={image}

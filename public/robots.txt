@@ -1,2 +1,24 @@
+# Robots.txt for https://nexitally.cc
 User-agent: *
 Allow: /
+Disallow: /elements
+Disallow: /sign-in
+Disallow: /sign-up
+Disallow: /signin
+Disallow: /signup
+
+# Search engine crawler accessibility
+User-agent: Googlebot
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: yisouspider
+Allow: /
+
+Sitemap: https://nexitally.cc/sitemap.xml
+Sitemap: https://nexitally.cc/sitemap-index.xml

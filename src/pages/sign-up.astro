@@ -1,167 +1,114 @@
 ---
-import { ArrowRight, CircleCheck, Lock, Mail, User } from "@lucide/astro";
+import { ArrowRight, CircleCheck, ShieldCheck, Zap, Sparkles, Globe } from "@lucide/astro";
 import Layout from "@/layouts/Layout.astro";
 import Button from "@/components/ui/Button.astro";
+import { siteConfig } from "@/config/site";
 ---
 
 <Layout
-  title="Sign up - RicoFast"
-  description="Sign up template page for RicoFast."
+  title={`官方授权账号开通 — ${siteConfig.title} 品牌官网`}
+  description="Nexitally 官方直属注册开通通道。享受专属推荐授权，10秒快速开通全球 IEPL / IPLC 专线网络。"
 >
   <main class="site-container py-12 md:py-20">
-    <section class="grid min-h-[calc(100vh-18rem)] items-center gap-8 lg:grid-cols-[minmax(420px,1.05fr)_minmax(0,0.95fr)]">
+    <section class="grid min-h-[calc(100vh-18rem)] items-center gap-10 lg:grid-cols-[minmax(420px,1.1fr)_minmax(0,0.9fr)]">
+      <!-- 注册引导卡片 -->
       <div
-        class="mx-auto w-full max-w-md lg:order-first"
+        class="mx-auto w-full max-w-lg lg:order-first"
         data-aos="fade-up-xs"
         data-aos-once="true"
       >
-        <div class="rounded-2xl border border-neutral-200 bg-bg-secondary/85 p-6 shadow-[0_18px_60px_rgba(25,34,47,0.08)] backdrop-blur dark:border-neutral-700 dark:bg-bg-secondary-dark/85 dark:shadow-[0_18px_60px_rgba(0,0,0,0.22)] sm:p-8">
-          <div class="mb-8">
-            <p class="text-xs font-medium uppercase tracking-[0.14em] text-primary dark:text-primary-light">Sign up</p>
-            <h1 class="mt-3 font-brand text-4xl tracking-normal text-neutral-800 dark:text-neutral-100">Create your account</h1>
-            <p class="mt-3 text-sm leading-6 text-neutral-500 dark:text-neutral-400">
-              Start with a clean account form and connect your own auth flow when ready.
+        <div class="rounded-3xl border border-primary/20 bg-bg-secondary/90 p-7 shadow-xl backdrop-blur dark:border-neutral-700 dark:bg-bg-secondary-dark/90 sm:p-9">
+          <!-- 标签 -->
+          <div class="mb-6">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-primary bg-primary/10 border border-primary/20">
+              <Sparkles class="w-3.5 h-3.5" /> 官方授权注册通道
+            </span>
+            <h1 class="mt-4 font-brand text-3xl sm:text-4xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100">
+              开启 Nexitally 专线账号
+            </h1>
+            <p class="mt-2.5 text-xs sm:text-sm leading-relaxed text-neutral-500 dark:text-neutral-400">
+              直连官方核心结算与节点分发集群。已内置专属优惠邀请码授权，10秒完成极速开通。
             </p>
           </div>
 
-          <form id="sign-up-form" class="space-y-5">
-            <div>
-              <label for="name" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Name</label>
-              <div class="relative">
-                <User class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400 dark:text-neutral-500" />
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autocomplete="name"
-                  required
-                  placeholder="Your name"
-                  class="w-full rounded-lg border border-neutral-200 bg-bg-secondary px-11 py-3 text-neutral-800 transition-colors placeholder:text-neutral-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-neutral-700 dark:bg-bg-secondary-dark dark:text-neutral-100 dark:placeholder:text-neutral-500"
-                />
-              </div>
+          <!-- 专享特权清单 -->
+          <div class="p-4 rounded-2xl bg-bg-primary/60 dark:bg-neutral-800/60 border border-primary/10 dark:border-neutral-700 mb-6 space-y-2.5 text-xs text-neutral-600 dark:text-neutral-300">
+            <div class="flex items-center gap-2">
+              <CircleCheck class="w-4 h-4 text-emerald-500 shrink-0" />
+              <span><strong>全链路 IEPL / IPLC 专线：</strong> 晚高峰 0% 拥塞丢包保障</span>
             </div>
-
-            <div>
-              <label for="email" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Email</label>
-              <div class="relative">
-                <Mail class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400 dark:text-neutral-500" />
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  required
-                  placeholder="you@example.com"
-                  class="w-full rounded-lg border border-neutral-200 bg-bg-secondary px-11 py-3 text-neutral-800 transition-colors placeholder:text-neutral-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-neutral-700 dark:bg-bg-secondary-dark dark:text-neutral-100 dark:placeholder:text-neutral-500"
-                />
-              </div>
+            <div class="flex items-center gap-2">
+              <CircleCheck class="w-4 h-4 text-emerald-500 shrink-0" />
+              <span><strong>多端并发不限设备：</strong> 手机、电脑、平板全平台支持</span>
             </div>
-
-            <div>
-              <label for="password" class="mb-2 block text-sm font-medium text-neutral-700 dark:text-neutral-300">Password</label>
-              <div class="relative">
-                <Lock class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400 dark:text-neutral-500" />
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autocomplete="new-password"
-                  required
-                  minlength="8"
-                  placeholder="At least 8 characters"
-                  class="w-full rounded-lg border border-neutral-200 bg-bg-secondary px-11 py-3 text-neutral-800 transition-colors placeholder:text-neutral-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-neutral-700 dark:bg-bg-secondary-dark dark:text-neutral-100 dark:placeholder:text-neutral-500"
-                />
-              </div>
+            <div class="flex items-center gap-2">
+              <CircleCheck class="w-4 h-4 text-emerald-500 shrink-0" />
+              <span><strong>自研客户端 + 通用订阅：</strong> Clash / Shadowrocket 一键导入</span>
             </div>
-
-            <label class="flex items-start gap-3 text-sm leading-6 text-neutral-600 dark:text-neutral-300">
-              <input
-                type="checkbox"
-                name="terms"
-                required
-                class="mt-1 h-4 w-4 rounded border-neutral-300 text-primary focus:ring-primary/30 dark:border-neutral-600 dark:bg-bg-secondary-dark"
-              />
-              <span>
-                I agree to the
-                <a href="javascript:void(0);" class="font-medium text-primary hover:text-primary-strong dark:text-primary-light dark:hover:text-primary-light-dark">terms</a>
-                and
-                <a href="javascript:void(0);" class="font-medium text-primary hover:text-primary-strong dark:text-primary-light dark:hover:text-primary-light-dark">privacy policy</a>.
-              </span>
-            </label>
-
-            <div class="auth-submit">
-              <Button url="javascript:void(0);" type="fill" className="w-full max-w-none justify-center">
-                Create account <ArrowRight size={16} />
-              </Button>
+            <div class="flex items-center gap-2">
+              <CircleCheck class="w-4 h-4 text-emerald-500 shrink-0" />
+              <span><strong>AI 与 4K 流媒体：</strong> ChatGPT 4o / Claude / Netflix 全解锁</span>
             </div>
-
-            <div id="sign-up-success" class="hidden rounded-lg border border-green-200 bg-green-50 p-3 text-center text-sm text-green-700 dark:border-green-800 dark:bg-green-900/20 dark:text-green-300">
-              Demo account created.
-            </div>
-          </form>
-
-          <div class="my-6 flex items-center gap-3">
-            <div class="h-px flex-1 border-t border-dashed border-neutral-200 dark:border-neutral-700"></div>
-            <span class="text-xs text-neutral-400 dark:text-neutral-500">or</span>
-            <div class="h-px flex-1 border-t border-dashed border-neutral-200 dark:border-neutral-700"></div>
           </div>
 
-          <div class="grid gap-3 sm:grid-cols-2">
-            <a href="javascript:void(0);" class="inline-flex items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm font-medium text-neutral-700 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary dark:border-neutral-700 dark:bg-neutral-900/30 dark:text-neutral-200 dark:hover:text-primary-light">
-              <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.74c-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.96c.85 0 1.7.12 2.5.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.07.36.32.68.94.68 1.9v2.81c0 .27.18.59.69.49A10.19 10.19 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z" />
-              </svg>
-              GitHub
-            </a>
-            <a href="javascript:void(0);" class="inline-flex items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-3 text-sm font-medium text-neutral-700 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:text-primary dark:border-neutral-700 dark:bg-neutral-900/30 dark:text-neutral-200 dark:hover:text-primary-light">
-              <span class="flex h-4 w-4 items-center justify-center rounded-full border border-current text-[10px] font-semibold leading-none">G</span>
-              Google
-            </a>
+          <!-- 核心转化按钮 -->
+          <div class="space-y-4">
+            <Button
+              url={siteConfig.registerUrl}
+              target="_blank"
+              type="fill"
+              className="w-full justify-center text-base py-3.5 shadow-lg"
+            >
+              <span>前往官方系统立即注册</span>
+              <ArrowRight class="w-4 h-4 ml-1.5" />
+            </Button>
+            <p class="text-center text-[11px] text-neutral-400">
+              * 点击直达官方统一开通网关，系统将自动绑定邀请码 <code>keqgvT5Y</code>
+            </p>
           </div>
 
-          <p class="mt-8 text-center text-sm text-neutral-500 dark:text-neutral-400">
-            Already have an account?
-            <a href="/sign-in" class="font-medium text-primary transition-colors hover:text-primary-strong dark:text-primary-light dark:hover:text-primary-light-dark">Sign in</a>
-          </p>
+          <!-- 提示 -->
+          <div class="mt-6 pt-5 border-t border-dashed border-neutral-200 dark:border-neutral-700/60 text-center text-xs text-neutral-500">
+            已有账号？
+            <a href={siteConfig.registerUrl} target="_blank" rel="nofollow noopener noreferrer" class="text-primary hover:underline font-medium ml-1">
+              直接登录控制台 &rarr;
+            </a>
+          </div>
         </div>
       </div>
 
+      <!-- 右侧：信誉与保障 -->
       <div
-        class="hidden lg:block"
+        class="hidden lg:block space-y-6"
         data-aos="fade-up-xs"
+        data-aos-delay="100"
         data-aos-once="true"
       >
-        <div class="ml-auto max-w-md">
-          <p class="mb-4 inline-flex rounded-full border border-primary/15 bg-primary/5 px-3 py-1 text-xs font-medium text-primary dark:border-primary-light/20 dark:bg-primary-light/10 dark:text-primary-light">
-            New workspace
+        <div class="max-w-md">
+          <p class="mb-3 inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
+            <ShieldCheck class="w-3.5 h-3.5" /> 品牌官方信誉保障
           </p>
-          <h1 class="font-brand text-5xl leading-tight tracking-normal text-neutral-800 dark:text-neutral-100">
-            Turn visitors into activated users.
-          </h1>
-          <p class="mt-5 text-base leading-8 text-neutral-600 dark:text-neutral-300">
-            A quiet registration page with room for provider buttons, policy links, and product context.
+          <h2 class="font-brand text-3xl font-bold tracking-tight text-neutral-800 dark:text-neutral-100">
+            始于 2020 年，值得托付核心业务的专线品牌
+          </h2>
+          <p class="mt-4 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+            无论是跨境电商独立站运营、TikTok 直播推流，还是日常学术检索与 4K 高清影音，Nexitally 为您提供 7×24 小时不间断的极速网络护航。
           </p>
         </div>
 
-        <div class="ml-auto mt-10 max-w-md border-y border-dashed border-neutral-200 py-6 dark:border-neutral-700">
-          <div class="grid gap-4">
-            <div class="flex items-start gap-3">
-              <span class="mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary dark:bg-primary-light/10 dark:text-primary-light">
-                <CircleCheck size={16} />
-              </span>
-              <div>
-                <h2 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100">Conversion-ready fields</h2>
-                <p class="mt-1 text-sm leading-6 text-neutral-500 dark:text-neutral-400">Name, email, password, and policy consent are included.</p>
-              </div>
+        <div class="grid gap-3 max-w-md">
+          <div class="p-4 rounded-2xl bg-bg-secondary/70 dark:bg-bg-secondary-dark/70 border border-primary/10 flex items-start gap-3">
+            <Zap class="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div>
+              <h3 class="text-xs font-bold text-neutral-800 dark:text-neutral-100">单节点最高 2.5 Gbps 突发吞吐</h3>
+              <p class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5">大文件下载、超高清视频秒开无压力，全节点真实 1.0x 计费。</p>
             </div>
-            <div class="flex items-start gap-3">
-              <span class="mt-0.5 flex h-8 w-8 items-center justify-center rounded-lg bg-accent/25 text-neutral-800 dark:bg-accent/20 dark:text-neutral-100">
-                <Lock size={16} />
-              </span>
-              <div>
-                <h2 class="text-sm font-semibold text-neutral-800 dark:text-neutral-100">Static template flow</h2>
-                <p class="mt-1 text-sm leading-6 text-neutral-500 dark:text-neutral-400">The submit state is local until an auth backend is connected.</p>
-              </div>
+          </div>
+          <div class="p-4 rounded-2xl bg-bg-secondary/70 dark:bg-bg-secondary-dark/70 border border-primary/10 flex items-start gap-3">
+            <Globe class="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <div>
+              <h3 class="text-xs font-bold text-neutral-800 dark:text-neutral-100">全球十余国核心专线节点</h3>
+              <p class="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5">港/台/日/新/美/英/法/德/马/越/土/泰等全量专线持续扩容。</p>
             </div>
           </div>
         </div>
@@ -169,21 +116,3 @@ import Button from "@/components/ui/Button.astro";
     </section>
   </main>
 </Layout>
-
-<script>
-  const form = document.getElementById('sign-up-form') as HTMLFormElement | null;
-  const successMsg = document.getElementById('sign-up-success');
-  const submitBtn = form?.querySelector('.auth-submit a') as HTMLAnchorElement | null;
-
-  submitBtn?.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    if (!form?.checkValidity()) {
-      form?.reportValidity();
-      return;
-    }
-
-    successMsg?.classList.remove('hidden');
-    form.reset();
-  });
-</script>
